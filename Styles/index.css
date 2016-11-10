@@ -1,0 +1,274 @@
+/* GENERAL */
+body {
+    padding-bottom: 40px;
+    background-image:url('../Images/bg1.jpg'); 
+}
+       
+hr {
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+}
+
+/* HEADER */
+
+/* TOP NAV */
+.topnav {
+    font-family: Helvetica,Arial,sans-serif;
+	background: #f5f5f5;
+}
+
+ul.breadcrumb {
+	margin: auto;
+}
+
+.topnav, .breadcrumb{
+    background-color: #F9D423;
+    color: black;
+}
+
+.topnav .breadcrumb a {
+    color: black;
+}
+
+.navbar .breadcrumb a:hover {
+    color: black;
+}
+
+.breadcrumb>li+li:before{
+    color: black;
+}
+
+/* TOP NAV */
+
+.navbar{
+    margin-bottom: 0px;
+    border: 0px;
+    background: #ffffff;
+    padding: 0px;
+    height: 120px;
+}
+
+.navbar {
+	position: relative;
+	z-index: 0;
+}
+
+.navbar .nav, .navbar .nav a {
+	margin: 0;
+}
+
+.container .logo {
+	display: block;
+	float: left;
+	padding: 15px 0;
+}
+
+.container .nav {
+	padding: 30px 0 0 0;
+	color: #fff;
+}
+
+.navbar .nav li {
+    font-family: "Dosis" , Helvetica,Arial,sans-serif;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.navbar .nav li a {
+	text-align: center;
+	padding: 20px 0 15px 15px;
+	margin: 0 10px;
+	color: black;
+    background-color: white;
+}
+
+.navbar .nav li a:hover {
+	color: black;
+    background-color: white;
+}
+
+img.logo{
+    margin-top: 0px;
+}
+
+/* BODY */
+
+/* LEVEL 1 */
+
+.jumbotron{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    background-image:url('../Images/bgJumbotron1.jpg');
+    margin-bottom: 0px;
+}
+
+.titleSection{
+    padding-top: 0px;
+    padding-bottom: 10px;
+    background-image:url('../Images/bgJumbotron2.jpg');
+
+}
+
+.titleSection h1{
+    color: #F9D423; 
+    text-shadow: rgb(0, 0, 0) 2px 2px 20px;
+}
+
+/*
+.titleSection::after {
+    content: "";
+    background-image:url('../Images/bgJumbotron1.jpg');
+    opacity: 0.6;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+*/
+
+canvas{
+    margin-bottom: 10px;
+}
+
+/* LEVEL 2 */
+
+.level2{
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.level2 .container p{
+    font-family: Helvetica,Arial,sans-serif;
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 21px;
+    font-weight: 200;
+}
+
+/* MEDIA QUERIES */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media 
+only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+
+    .jumbotron{
+        display: none;
+    }
+
+    .mobileCenter{
+        /*
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
+        */
+    }
+
+    .navbar-brand .logo{
+        height: 65px;
+    }
+
+    .navbar{
+        height: 80px;
+    }
+
+    .container .logo {
+        padding-top: 0px;
+    }
+
+    .navbar-collapse{
+        border: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .navbar .nav li a {
+        margin: 0px;
+        padding-left: 15px;
+        text-align: left;
+    }
+
+    .navbar-toggle {
+        margin-top: 25px;
+    }
+
+    .container .nav {
+        padding-top: 10px;
+    }
+}
+
+
+/* Smartphones (portrait) ----------- */
+@media 
+only screen 
+and (max-width : 320px) {
+
+    .jumbotron{
+        display: none;
+    }
+
+}
+
+
+
+/* iPads (portrait) ----------- */
+@media 
+only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+
+    .container {
+        width: 940px;
+    }
+
+    ul.breadcrumb {
+        width: 940px;
+    }
+}
+
+/* Desktops and laptops ----------- */
+@media 
+only screen 
+and (min-width : 1224px) {
+
+    .container {
+        width: 940px;
+    }
+
+    ul.breadcrumb {
+        width: 940px;
+    }
+}
+
+/* Large screens ----------- */
+@media 
+only screen 
+and (min-width : 1824px) {
+
+    .container {
+        width: 940px;
+    }
+
+    ul.breadcrumb {
+        width: 940px;
+    }
+}
+
+img.about{
+    max-width:100% !important;
+    max-height:100% !important;
+    display:block;
+    border: 2px solid #e3e3e3;
+}
+
+p.header{
+    margin-top: 20px;
+}
