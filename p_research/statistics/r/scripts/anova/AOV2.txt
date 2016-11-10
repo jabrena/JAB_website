@@ -1,0 +1,46 @@
+GLOBAL<- read.table("C:/Documents and Settings/general/Escritorio/GLOBAL.txt",header=T,sep="\t", quote="")
+
+
+pairs(GLOBAL)
+
+plot(GLOBAL$PROVEEDORES, GLOBAL$SECTORES)
+
+lm.HYPO1 = lm(SECTORES~PROVEEDORES,data=GLOBAL)
+plot(GLOBAL$PROVEEDORES, GLOBAL$SECTORES)
+abline(lm.HYPO1)
+
+plot(lm.HYPO1)
+summary(lm.HYPO1) 
+lm.HYPO1
+
+layout(matrix(c(1,2,3,4),2,2))
+
+plot(lm.HYPO1,ask = T)
+resid(lm.HYPO1)
+
+par(mfrow=c(1,2))
+plot(GLOBAL$PROVEEDORES, GLOBAL$SECTORES)
+qqnorm(resid(lm.HYPO1))
+
+anova(lm.HYPO1)
+
+boxplot(GLOBAL$PROVEEDORES, GLOBAL$SECTORES)
+
+fm1 <- aov(GLOBAL$PROVEEDORES ~ GLOBAL$SECTORES)
+fm1Tukey=TukeyHSD("fm1", ordered= TRUE, conf.level = 0,95)
+
+cor(GLOBAL$PROVEEDORES, GLOBAL$SECTORES)  
+cor(GLOBAL$PROVEEDORES, GLOBAL$SECTORES)^2 
+cor(rank(GLOBAL$PROVEEDORES),rank(GLOBAL$SECTORES))
+
+library(MASS) 
+plot(GLOBAL$PROVEEDORES, GLOBAL$SECTORES)
+lm.HYPO1 = lm(SECTORES~PROVEEDORES,data=GLOBAL)
+lmr.HYPO1 = lmr(SECTORES~PROVEEDORES,data=GLOBAL)
+abline(lm.HYPO1),lty="1") # lty sets line type 
+abline(lmr.HYPO1,lty="2")
+legend(locator(1),legend=c('lm','rlm'),lty=1:2)
+
+simple.lm(x,y,show.ci=TRUE,conf.level=0.90)
+
+

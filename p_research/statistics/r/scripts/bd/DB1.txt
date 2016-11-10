@@ -1,0 +1,55 @@
+######################################
+# SCRIPT DE CONEXION A BD            #
+# Autor: Juan Antonio Breña Moral    #
+# Email: bren@juanantonio.info       #
+# Fecha:  15/07/05                   #
+######################################
+
+# REQUERIMIENTOS:
+# Libreria: DBI, RODBC
+# Conexion ODBC en maquina. Panel de control DNS Sistema.
+
+#1. Carga de librerias
+library(DBI)
+library(RODBC)
+
+#2. Conexion
+CONEXION <- odbcConnect("CLIENTES")
+
+#3. Vista de tablas.
+sqlTables(CONEXION)
+
+#4. Listar una tabla.
+sqlFetch(CONEXION, "VENTAS")
+
+#5. Ejecutar una QUERY SQL.
+SQL_STRING <- "SELECT CUSTOMER, SUM(SALES) AS VENTAS FROM VENTAS GROUP BY CUSTOMER ORDER BY 2 DESC, CUSTOMER"
+QUERY1 <- sqlQuery(CONEXION, SQL_STRING)
+QUERY1
+
+# Ventas con valores >0
+SQL_STRING <- "SELECT CUSTOMER, SUM(SALES) AS VENTAS FROM VENTAS WHERE SALES > 0 GROUP BY CUSTOMER ORDER BY 2 DESC, CUSTOMER"
+QUERY2 <- sqlQuery(CONEXION, SQL_STRING)
+QUERY2
+
+hist(QUERY2$VENTAS)
+
+# Dame los 5 clientes mas valiosos
+CLIENTES_TOP <- c()
+VENTAS_TOP <- c()
+
+attach(QUERY1)
+for (i in 1:5){
+	CLIENTES_TOP[i] <- CUSTOMER[[i]]
+	VENTAS_TOP[i] <- VENTAS[[i]]
+}
+detach(QUERY1)
+TABLA_PRINCIPALES_CLIENTES <- data.frame(CLIENTES_TOP,VENTAS_TOP)
+print(TABLA_PRINCIPALES_CLIENTES)
+
+## remove the table
+#sqlDrop(channel, "USArrests")
+
+
+## close the connection
+odbcClose(CONEXION)

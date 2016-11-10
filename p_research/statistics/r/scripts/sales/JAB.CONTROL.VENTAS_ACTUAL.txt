@@ -1,0 +1,53 @@
+#####################################
+# SCRIPT DE ANALISIS DE DATOS       #
+# Autor: Juan Antonio Breña Moral   #
+# Email: bren@juanantonio.info      #
+#####################################
+
+#Funcion que dadas unas ventas, devuelve un vector con las ventas acumuladas de las ventas.
+JAB.CONTROL.GET_VENTAS_ACUMULADAS <- function(DATOS){
+	VENTAS_ACUMULADAS <- c()
+	for (i in 1:length(DATOS)){
+		VENTAS_ACUMULADAS[i] <-sum(DATOS[i])
+	}
+
+	return(VENTAS_ACUMULADAS)	
+}
+
+JAB.CONTROL.GET_OBJETIVOS_MENSUALES <- function(OBJETIVOS){
+	OBJETIVOS_MENSUALES <- c()
+	for (i in 1:length(OBJETIVOS)){
+		OBJETIVOS_MENSUALES[i] <- OBJETIVOS[i]/12
+	}
+
+	return(OBJETIVOS_MENSUALES)	
+}
+
+JAB.CONTROL.GET_PORCENTAJES <- function(VA,OBJETIVOS_MENSUALES, MESES){
+	SUMATORIO_OBJETIVOS_ACTUAL <- c()
+	for (i in 1:length(OBJETIVOS)){
+		SUMATORIO_OBJETIVOS_ACTUAL[i] <- OBJETIVOS_MENSUALES[i]*MESES
+	}
+	PORCENTAJES_ACTUALES <- c()
+	for (i in 1:length(OBJETIVOS)){
+		POR <- (VA[[i]]*100)/SUMATORIO_OBJETIVOS_ACTUAL[[i]]
+		PORCENTAJES_ACTUALES[i] <- POR
+	}
+	return(PORCENTAJES_ACTUALES)
+}
+
+JAB.CONTROL.VENTAS_ACTUAL <- function(DATOS,OBJETIVOS,DELEGACIONES){
+	#Se extraen los datos del primer mes, para saber los meses dados.
+	SAMPLE <- DATOS[[1]]
+	MESES <- length(SAMPLE)
+	OBJ <- OBJETIVOS
+	OBJETIVOS_MENSUALES <- JAB.CONTROL.GET_OBJETIVOS_MENSUALES(OBJETIVOS)
+	VA <- JAB.CONTROL.GET_VENTAS_ACUMULADAS(DATOS)
+	POR <- JAB.CONTROL.GET_PORCENTAJES(VA,OBJETIVOS_MENSUALES,MESES)
+	
+	print(DELEGACIONES)
+	print(OBJ)
+	print(OBJETIVOS_MENSUALES)
+	print(VA)
+	print(POR)
+}

@@ -1,0 +1,86 @@
+
+
+setwd("C:/DATOS/DOCUMENTACION/DOCTORADO/MODELOS/R/REGRESION")
+source('multipleRegressionFunctions.txt', local=TRUE)
+
+'EJERCICIO 7.1
+
+'EXPLICACION DE DATOS
+
+'Fuente: Elaboración propia
+'Descripción:
+'100 datos de precios de viviendas y sus características
+'Primera columna : precios de viviendas  en euros
+'Segunda columna :  superficie en metros cuadrados
+'Tercera : numero de cuartos de baño
+'Cuarta: número de dormitorios
+'Quinta: número de plazas de garaje
+'Sexta: edad de la vivienda  
+'Séptima: 1 buenas vistas
+'              =0 vistas corrientes
+
+
+'A: CARGA DE DATOS
+
+DATOS <- read.table("C:/DATOS/DOCUMENTACION/DOCTORADO/MODELOS/R/REGRESION/DATOS_LIBRO/preciocasas.dat",header=F,sep="", quote="") 
+
+Y = as.numeric(DATOS$V1)
+X2 = as.numeric(DATOS$V2)
+X3 = as.factor(DATOS$V3)
+X4 = as.factor(DATOS$V4)
+X5 = as.factor(DATOS$V5)
+X6 = as.numeric(DATOS$V6)
+X7 = as.factor(DATOS$V7)
+
+DATOS_ESTUDIO <- data.frame(Y,X2,X3,X4,X5,X6,X7);
+DATOS_ESTUDIO
+
+pairs(DATOS_ESTUDIO)
+
+
+TY <- "Precio de vivienda, PV"
+TX2 <- "Superficie, S"
+TX3 <- "Numero de cuartos de baño, NB"
+TX4 <- "Numero de dormitorios, ND"
+TX5 <- "Numero de plazas de garage, NPG"
+TX6 <- "Edad de la vivienda, EV"
+TX7 <- "Calidad de vistas, CV"
+
+TITULOS_ESTUDIO <- data.frame(TY,TX2,TX3,TX4,TX5,TX6,TX7)
+TITULOS_ESTUDIO
+
+'B: UNIVARIATE EDA
+
+viewEDA(DATOS_ESTUDIO,TITULOS_ESTUDIO)
+
+viewEDA(DATOS,TITULOS_ESTUDIO)
+
+'CONCLUSIONES:
+
+'C: CREATE MODEL
+
+REGRESSION <- createSRM(Y,X)
+REGRESSION
+
+'CONCLUSIONES
+'Los resultados de la regresión son:
+
+' NOTA: Si se detectan datos outliers, es necesario eliminarlos del modelo
+
+simpleOutlierDetection(Y,1)
+simpleOutlierDetection(X,1)
+
+'NOTA: Una vez tengo detectado donde estan los datos OUTLIERS que afectan al modelo, se vuelve a generar el modelo.
+
+Y2 = getSubconjunto(Y,1,31)
+X2 = getSubconjunto(X,1,31)
+
+viewEDA(Y2,X2,TY,TX)
+
+'CONCLUSIONES
+
+REGRESSION2 <- createSRM(Y2,X2)
+REGRESSION2
+
+'CONCLUSIONES
+'Los resultados de la regresión son:

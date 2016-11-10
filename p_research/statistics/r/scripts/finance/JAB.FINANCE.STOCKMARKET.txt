@@ -1,0 +1,36 @@
+library("UsingR");
+
+#Plot stock quote
+PSQ <- function(INSTRUMENT,FROM,TO,START){
+    #Procedure to download Stock Quote Information
+    DATA <-yahoo.get.hist.quote(
+        instrument = INSTRUMENT, 
+        destfile = paste(INSTRUMENT, ".csv", sep = ""), 
+        start=FROM,
+        end=TO, 
+        quote = c("Close"), 
+        adjusted = TRUE, 
+        download = TRUE, 
+        origin = "1970-01-01",
+        compression = "d");
+
+    #Conversion procedure to Time Series R Objetct;
+    DATA.TS = ts(DATA,frequency = 365, start = c(START, 1))
+    plot(DATA.TS);
+    return(DATA.TS);
+}
+
+#To compare
+COMPARE_QUOTES <- function(QUOTES,FROM,TO,START){
+    L = length(COMPANIES);
+    par(mfrow=c(L,1));
+    for  (i in 1:L){
+        PSQ(QUOTES[i],FROM,TO,START);
+    }
+    par(mfrow=c(1,1));
+}
+
+COMPANIES <-c("GE","MMM","IBM");
+
+COMPARE_QUOTES(COMPANIES,"1990-01-01","2006-06-16",1990);
+IBM <- PSQ("IBM","1990-01-01","2006-06-16",1990);

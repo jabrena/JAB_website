@@ -1,0 +1,117 @@
+# ESTUDIO INTERESANTE.
+nboot<-100 # number of bootstrap samples
+sample.size<-50
+# Contaminated Normal generator function
+#
+cnormal<-function(cont.prob, K1, N1){
+samp.prob<-rbinom(N1,1,cont.prob)
+x.1<-rnorm(N1,0,1)
+x.2<-rnorm(N1,0,K1)
+x<-ifelse(samp.prob>0, x.1, x.2)
+x}
+# Sample from Contaminated Normal
+#
+x<-cnormal(cont.prob=.90, K1=10, N1=sample.size)
+y<-matrix(sample(x, sample.size * nboot, replace = T), nrow = nboot)
+y1.means<- apply(y, 1, mean)
+plot(density(y1.means), xlim=c(-1.5, 1.5), lty=1, ylim=c(0, 4), pch=0,
+main=' ', xlab=' ',
+col='red')
+par(new=T)
+y2.medians<- apply(y, 1, median)
+plot(density(y2.medians), xlim=c(-1.5, 1.5), lty=2, ylim=c(0, 4), pch=4,
+main=' ', xlab=' ',
+col='black')
+legend(-1.5, 3.5, cex=.8, lty=c(1,2), c('Mean', 'Median'), col =
+c('red','black'))
+print(mean(y1.means))
+print(var(y1.means)^.5)
+print(mean(y2.medians))
+print(var(y2.medians)^.5)
+
+library(MASS)
+nboot<-100 # number of bootstrap samples
+k<-1.28
+trim<-.10
+sample.size<-50
+# M-Estimator from MASS Library
+#
+mest.MASS<-function(x, k){
+location<-hubers(x, k)$mu
+}
+# Contaminated Normal generator function
+#
+cnormal<-function(cont.prob, K1, N1){
+samp.prob<-rbinom(N1,1,cont.prob)
+x.1<-rnorm(N1,0,1)
+x.2<-rnorm(N1,0,K1)
+x<-ifelse(samp.prob>0, x.1, x.2)
+x}
+# Sample from Contaminated Normal
+#
+x<-cnormal(cont.prob=.90, K1=10, N1=sample.size)
+# Generate Bootstrap samples from CN sample
+#
+y<-matrix(sample(x, sample.size * nboot, replace = T), nrow = nboot)
+y1.means<- apply(y, 1, mean)
+plot(density(y1.means), xlim=c(-1.5, 1.5), lty=1, ylim=c(0, 4), pch=0,
+main=' ', xlab=' ',
+col='red')
+par(new=T)
+y2.means.trimmed<- apply(y, 1, mean, trim)
+plot(density(y2.means.trimmed), xlim=c(-1.5, 1.5), lty=2, ylim=c(0, 4),
+pch=4, main=' ', xlab=' ',
+col='green')
+par(new=T)
+y3.mestimator<- apply(y, 1, mest.MASS, k)
+plot(density(y3.mestimator), xlim=c(-1.5, 1.5), lty=3, ylim=c(0, 4), pch=4,
+main=' ', xlab= ' ',
+col='black')
+par(new=T)
+y4.medians<- apply(y, 1, median)
+plot(density(y4.medians), xlim=c(-1.5, 1.5), lty=4, ylim=c(0, 4), pch=4,
+main=' ', xlab=' ',
+col='blue')
+legend(-1.5, 3.5, cex=.8, lty=c(1,2,3,4), c('Mean', 'Trimmed Mean',
+'Mestimator', 'Median'), col = c('red','green','black', 'blue'))
+print(mean(y1.means))
+print(var(y1.means)^.5)
+print(mean(y2.means.trimmed))
+print(var(y2.means.trimmed)^.5)
+print(mean(y3.mestimator))
+print(var(y3.mestimator)^.5)
+print(mean(y4.medians))
+print(var(y4.medians)^.5)
+
+
+http://www.unt.edu/benchmarks/archives/2001/august01/rss.htm
+
+### Control
+
+x<-c(41.0,38.4,24.4,25.9,21.9,18.3,13.1,27.3,
+28.5,-16.9,26.0,17.4,21.8,15.4,27.4,19.2,
+22.4,17.7,26.0,29.4,21.4,26.6,22.7)
+
+### Experimental
+
+y<-c(10.1,6.1,20.4,7.3,14.3,15.5,-9.9,6.8,
+28.2,17.9,-9.0,-12.9,14.0,6.6,12.1,15.7,
+39.9,-15.9,54.6,-14.7,44.1,-9.0)
+
+#Library for exploratory data analysis
+
+library(eda)
+summary(x)
+summary(y)
+
+#Set graphics window for two plots per page
+
+par(mfrow=c(2,1))
+
+#Plot qqplots for each group
+
+qqnorm(x)
+qqline(x)
+qqnorm(y)
+qqline(y)
+

@@ -1,0 +1,14 @@
+# CARGA DE DATOS
+GLOBAL<- read.table("C:/Documents and Settings/ener9876/Desktop/GLOBAL.txt",header=T,sep="\t", quote="")
+
+# VISTA DE DATOS
+GLOBAL
+
+# HYPOTESIS1. SECTORES Y PROVEEDORES
+lm.HYPO1 = lm(SECTORES~PROVEEDORES,data=GLOBAL)
+plot(GLOBAL$PROVEEDORES, GLOBAL$SECTORES)
+abline(lm.HYPO1)
+summary(lm.HYPO1) 
+
+layout(matrix(c(1,2,3,4),2,2))
+plot(lm.HYPO1)

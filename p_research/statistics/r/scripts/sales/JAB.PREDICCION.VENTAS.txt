@@ -1,0 +1,201 @@
+###################################
+# SCRIPT DE ANALISIS DE DATOS     #
+# Autor: Juan Antonio Breña Moral #
+# Email: bren@juanantonio.info    #
+###################################
+
+# Funcion que carga las librerias.
+CARGA_LIBRERIAS <- function(){
+	library("forecast")#Prediccion
+}
+  
+# Funcion que genera el mensaje de cabecera.
+HEADER <-function(){
+	cat("\n::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
+	cat("\n:: SALES PREDICTION | AUTHOR: Juan Antonio Breña Moral          ::")
+	cat("\n:: VERSION: 2006-06-17 | DOWNLOADS: http://www.juanantonio.info ::")
+	cat("\n:: EMAIL: bren@juanantonio.info                                 ::")
+	cat("\n::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
+	cat("\n:: DESCRIPTION:                                                 ::")
+	cat("\n:: Sales Prediction, is a Script to make prediccions. It was    ::")
+	cat("\n:: designed to control a sales budget in any company  using     ::")
+	cat("\n:: ARIMA Time Series statistical techniques. The script needs   ::")
+	cat("\n:: a sales data to start to build a ARIMA model to make a       ::")
+	cat("\n:: predictions. This script is very useful to design a sales    ::")
+	cat("\n:: budget in the following exercise and control it. The         ::")
+	cat("\n:: methodology used to build ARIMA model is Box-Jenkins.        ::")
+	cat("\n::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n")
+
+
+}
+
+
+# Funcion que permite realizar pausas, util cuando que visualizar y analizar graficos.
+PAUSA <- function(MENSAJE){
+	if (interactive()) {
+		eval(MENSAJE)
+		cat("\nPULSE INTRO PARA CONTINUAR >>")
+		cat("\n")
+		readline()
+	}
+}
+
+# Funcion que permite conocer la estructura de los datos de analisis.
+JAB.PREDICCION.VENTAS.EDA <- function(DATOS){
+    par(mfrow= c(2,2));
+    hist(DATOS, probability =T);
+    lines(density(DATOS));
+    qqnorm(DATOS);
+    acf(DATOS);
+    pacf(DATOS);    
+}
+
+# FUNCION PARA UNIR ARRAYS
+ARRAY_MERGER <- function(ARRAY1,ARRAY2){
+	TOTAL = length(ARRAY1) + length(ARRAY2);
+	ARRAY_FINAL <- c();
+	ARRAY_FINAL <- ARRAY1;
+	j = 1;
+	for (i in (length(ARRAY1)+1):TOTAL){
+		ARRAY_FINAL[i] <- as.numeric(ARRAY2[[j]]);
+		j = j + 1;
+	}
+	return(ARRAY_FINAL);
+}
+
+#Dado un array de datos originales y un vector de datos de prediccion, se genera un grafico donde se muestra la 
+JAB.PREDICCION.VENTAS.GRAFICO <- function(DATOS,DATOS_PREDICCION){
+    par(mfrow=c(1,1))
+	#1. Creamos un  vector para visualizar un grafico con la tendencia tras haber predecido.
+          ARRAY_FINAL <- ARRAY_MERGER(DATOS,DATOS_PREDICCION)
+
+          TOTAL = length(DATOS) + length(DATOS_PREDICCION);
+	#2. Visualizacion de grafico
+	plot(ARRAY_FINAL,type="l", main = "PREDICCION MEDIANTE METODO ARIMA", xlab="", ylab="Sales")
+	EJEX <- seq(TOTAL-length(DATOS_PREDICCION),TOTAL)
+	EJEY <- DATOS[[length(DATOS)]]
+	j= 2
+	for (i in 1:length(DATOS_PREDICCION)){
+		EJEY[j] <- DATOS_PREDICCION[[i]]
+		j = j+1
+	}
+	lines(EJEX,EJEY, type = "l", col = "red")
+}
+
+# Funcion que se le pasa un Array de datos y un numero de periodos de prediccion y calcula una prediccion. 
+JAB.PREDICCION.VENTAS <- function(DATOS,PERIODOS_PREDICCION){
+
+    CARGA_LIBRERIAS();
+    HEADER();
+
+    DATOS.TS <- ts(DATOS,frequency = 12, start = c(2003, 1))
+
+    #1. Analisis de la naturaleza de los datos;
+    cat("\n1. Calculando prediccion ARIMA.")
+    JAB.PREDICCION.VENTAS.EDA(DATOS.TS);
+
+    #1. Creamos la prediccion mediante el mejor modelo ARIMA.
+	cat("\n2. Calculando prediccion ARIMA.")
+	DATOS.TS <- ts(DATOS,frequency = 12, start = c(2003, 1))
+	DATOS.BEST_ARIMA <- best.arima(DATOS.TS)
+	DATOS.PREDICCION <- forecast(DATOS.BEST_ARIMA,PERIODOS_PREDICCION)
+	cat("\n2. Prediccion ARIMA, OK.\n")
+	#print(DATOS.PREDICCION)
+
+	#2. Pasamos datos de prediccion a un vector.
+	DATOS_ARRAY_PREDICCION <- c()
+	for (i in 1:length(DATOS.PREDICCION$mean)){
+		DATOS_ARRAY_PREDICCION[i] <- as.numeric(DATOS.PREDICCION$mean[[i]])
+	}
+
+	cat("\n3. Visualizar Predicción ARIMA.\n")
+    PAUSA("Click to show the prediction Graph");
+	JAB.PREDICCION.VENTAS.GRAFICO(DATOS,DATOS_ARRAY_PREDICCION)
+	return(DATOS_ARRAY_PREDICCION)	
+}
+
+#206.06.16
+#FUNCION QUE CALCULA LA SUMA TOTAL DE VENTAS EN UN EJERCICIO
+SALES_SUM <-function(HISTORY_SALES,DESDE,HASTA,PREDICTION){
+
+	SALES_IN_YEAR = sum(HISTORY_SALES[DESDE:HASTA]);
+	SALES_PREDICTION = sum(PREDICTION);
+	return(sum(SALES_IN_YEAR,SALES_PREDICTION));
+}
+
+#FUNCION QUE PERMITE OBSERVAR LA DESCOMPOSICION DE LA SERIE
+SALES_DESCOMPOSTION <- function(DATOS,DESDE,FRECUENCIA){
+	DATOS.TS <- ts(DATOS,frequency = FRECUENCIA, start = DESDE);
+	
+	par(mfrow = c(1,2));
+	DATOS.STL <- stl(DATOS.TS,"per");
+	DATOS.DECOMPOSE <- decompose(DATOS.TS);
+	plot(DATOS.STL);
+	plot(DATOS.DECOMPOSE);
+	par(mfrow = c(1,1));
+}
+
+GET_BEST_ARIMA_MODEL <- function(DATOS,FREQUENCY,START){
+	DATOS.TS <- ts(DATOS,frequency = FREQUENCY, start = START);
+	DATOS.BEST_ARIMA <- best.arima(DATOS.TS);
+	return(DATOS.BEST_ARIMA);
+}
+
+
+
+COMPARE_BUDGET_VS_SALES <- function(LAST_EXERCISE,BUDGET,REAL,HASTA){
+	#Plot a graphic to evaluate the budget evolution
+	TOTAL <- ARRAY_MERGER(BUDGET,REAL);
+	TOTAL <- ARRAY_MERGER(TOTAL,LAST_EXERCISE);
+	MAX <- max(TOTAL);
+	MIN <- min(TOTAL);
+	#Number of samples
+	EJEX <- seq(length(REAL));
+	
+	LEGEND_NAMES <- c("Sales","Sales Budget", "Last exercise")
+	SALES_COLOURS <- c("black","red","green")
+	LTY_OPTIONS <- c(1,2,2)
+		
+	#Sales in current year
+	plot(REAL,type="l",xlab="Months", ylab="Sales",ylim= c(MIN, MAX),xaxt = "n", col = SALES_COLOURS[1], lty=LTY_OPTIONS[1]);
+	#Sales Budget
+	lines(EJEX,BUDGET, lty=LTY_OPTIONS[2], type = "l",col = SALES_COLOURS[2]);
+	#Sales in last year
+	lines(EJEX,LAST_EXERCISE, lty=LTY_OPTIONS[3], type = "l", col = SALES_COLOURS[3]);
+		
+	Y <- rep(0,length(BUDGET)-1)
+	Y <- ARRAY_MERGER(Y,c(MAX));
+	X <- rep(HASTA,12);
+	lines(X,Y,type = "b", lty = 1, pch = 4, col = "blue");
+		
+	MONTHS <- c('January','February','March','April','May','June','July','August','September','October','November','December');
+	axis(1, 1:12, MONTHS, col.axis = "black");
+	legend("topright",LEGEND_NAMES, lty = LTY_OPTIONS, xjust = 1, yjust = 1, col = SALES_COLOURS)
+	
+	#Show results in a table
+	#SALES_DASHBOARD(BUDGET,REAL[1:HASTA],HASTA,LAST_EXERCISE[1:HASTA])
+}
+
+SALES_DASHBOARD <- function(BUDGET,CURRENT_SALES,SALES_PREDICTION, MONTH,LAST_EXERCISE){
+	COLUMN_NAMES <- c("SALES","BUDGET","LAST EXERCISE", "S/B", "S/LE");
+	CURRENT <- c();
+	
+	#Show current information about Sales
+	CURRENT[1] <- sum(CURRENT_SALES);
+	CURRENT[2] <- sum(BUDGET[1:MONTH]);
+	CURRENT[3] <- sum(LAST_EXERCISE[1:MONTH]);
+	CURRENT[4] <- paste(format(((sum(CURRENT_SALES)/sum(BUDGET[1:MONTH]))*100),nsmall = 1),"%", sep = "");
+	CURRENT[5] <- paste(format(((sum(CURRENT_SALES)/sum(LAST_EXERCISE[1:MONTH]))*100),nsmall = 1),"%", sep = "");
+	
+	TOTAL <- c();
+	T <- sum(CURRENT_SALES)+sum(SALES_PREDICTION)
+	TOTAL[1] <- T;
+	TOTAL[2] <- sum(BUDGET);
+	TOTAL[3] <- sum(LAST_EXERCISE);
+	TOTAL[4] <- paste(format(((T/sum(BUDGET))*100),nsmall = 1),"%", sep = "");
+	TOTAL[5] <- paste(format(((T/sum(LAST_EXERCISE))*100),nsmall = 1),"%", sep = "");
+		
+	CUADRO <- rbind(CURRENT,TOTAL)
+	colnames(CUADRO) <- COLUMN_NAMES;
+	print(CUADRO);	
+}

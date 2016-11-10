@@ -1,0 +1,41 @@
+#####################################
+# SCRIPT DE ANALISIS DE DATOS       #
+# Autor: Juan Antonio Breña Moral   #
+# Email: bren@juanantonio.info      #
+#####################################
+# PROGRAMA DE CONTROL DE VENTAS     #
+# VERSION 1.0                       #
+#####################################
+
+# 1. Configuracion.
+# 1.1 Almacena la informacion antigua del Working Directory.
+OLD_WD <- getwd()
+# 1.2 Establece el Working Directory.
+NEW_WD <- "C:/Documents and Settings/JBRENA/Escritorio/R/"
+setwd(NEW_WD)
+
+# 2. Carga de datos.
+VENTAS <- read.table("VENTAS.csv",header=T,sep=";", quote="")
+
+# 2.1 Preparacion de datos.
+attach(VENTAS)
+DELEGACIONES <- c("ESTE","CLL","SUR","NORTE","CLMS","NUCLEAR")
+VENTAS_REAL <- data.frame(ESTE_R,CLL_R,SUR_R,NORTE_R,CLMS_R,NUCLEAR_R)
+detach(VENTAS)
+names(VENTAS_REAL) = DELEGACIONES
+OBJETIVOS <- c(999999999,999999999,999999999,999999999,999999999,999999999)
+
+# 3 Ejecucion del programa.
+# 3.1 Carga de ficheros de programacion.
+source("r_scripts/JAB.TOOLS.txt")
+source("r_scripts/JAB.CONTROL.VENTAS.MAIN.txt")
+source("r_scripts/JAB.CONTROL.VENTAS_ACTUAL.txt")
+# 3.2 Ejecucion de programa.
+JAB.CONTROL.VENTAS(VENTAS_REAL,OBJETIVOS,DELEGACIONES)
+
+#CREACION DE REPORT.
+library(tools)
+FILE <- "JAB.CONTROL.VENTAS.REPORT1.snw"
+Sweave(FILE, driver = RweaveLatex())
+options(texi2dvi="texify.exe")
+texi2dvi("JAB.CONTROL.VENTAS.REPORT1.tex", pdf = false, clean = FALSE,texi2dvi = getOption("texi2dvi"))

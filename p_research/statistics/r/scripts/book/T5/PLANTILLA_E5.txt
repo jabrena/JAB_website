@@ -1,0 +1,52 @@
+
+
+setwd("C:/DATOS/DOCUMENTACION/DOCTORADO/MODELOS/R/REGRESION")
+source('simpleRegressionFunctions.txt', local=TRUE)
+
+'EJERCICIO 5.1
+
+'EXPLICACION DE DATOS
+
+'A: CARGA DE DATOS
+
+DATOS <- read.table("C:/DATOS/DOCUMENTACION/DOCTORADO/MODELOS/R/REGRESION/DATOS_LIBRO/costes.dat",header=F,sep="", quote="") 
+
+Y = as.numeric(DATOS$V1)
+X = as.numeric(DATOS$V2)
+
+TY <- "Costes Totales\n de Fabricación, CTF"
+TX <- "Unidades Fabricadas, UF"
+
+'B: UNIVARIATE EDA
+
+viewEDA(Y,X,TY,TX)
+
+'CONCLUSIONES:
+
+'C: CREATE MODEL
+
+REGRESSION <- createSRM(Y,X)
+REGRESSION
+
+'CONCLUSIONES
+'Los resultados de la regresión son:
+
+' NOTA: Si se detectan datos outliers, es necesario eliminarlos del modelo
+
+simpleOutlierDetection(Y,1)
+simpleOutlierDetection(X,1)
+
+'NOTA: Una vez tengo detectado donde estan los datos OUTLIERS que afectan al modelo, se vuelve a generar el modelo.
+
+Y2 = getSubconjunto(Y,1,31)
+X2 = getSubconjunto(X,1,31)
+
+viewEDA(Y2,X2,TY,TX)
+
+'CONCLUSIONES
+
+REGRESSION2 <- createSRM(Y2,X2)
+REGRESSION2
+
+'CONCLUSIONES
+'Los resultados de la regresión son:

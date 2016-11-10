@@ -1,0 +1,214 @@
+
+JAB.ANALYTICS.GET_CUMULATIVE <- function(DATOS){
+	DATOS_ACUMULADOS <- c()
+	DATOS_ACUMULADOS[1] <- DATOS[1]
+	for(i in 2:length(DATOS)){
+		j <- i-1
+		DATOS_ACUMULADOS[i]	<- DATOS_ACUMULADOS[j] + DATOS[i]
+	}
+	return(DATOS_ACUMULADOS)
+}
+
+JAB.ANALYTICS.VIEW <- function(DATA){
+    par(mfrow= c(2,1));
+    DATA.CUMULATIVE <- JAB.ANALYTICS.GET_CUMULATIVE(DATA);
+
+    TITLE <- "www.juanantonio.info ";
+    X_LABEL = "Days";
+    Y_LABEL = "Visits per day";
+
+    plot(DATA,main = TITLE, xlab=X_LABEL, ylab=Y_LABEL, type = "h",  col = "dark red");
+
+    Y_LABEL = "Cumulative Visits per day";
+
+    plot(DATA.CUMULATIVE,main = "", xlab=X_LABEL, ylab=Y_LABEL, type = "h",  col = "dark red");
+    par(mfrow= c(1,1));
+}
+
+
+JAB.ANALYTICS.LOAD_XML <- function(DATA_FILE){
+    XML_DOC <-  xmlTreeParse(DATA_FILE);
+    XML_DOC_ROOT <- xmlRoot(XML_DOC);
+    #XML_DOC_ROOT;
+    #Node used to analyze
+    REPORT_NODE <- XML_DOC_ROOT[[1]];
+    DATA <- REPORT_NODE[[2]];
+    return(DATA)
+}
+
+JAB.ANALYTICS.GET_VISIT_ARRAY <- function(DATA){
+    #CREATE ARRAY
+    DATE_TRAFFIC <- c();
+    VISITS <- c();
+    PAGES <- c();
+
+    UNTIL <- xmlSize(DATA)
+
+    COUNTER_VISIT_NODES = 0;
+
+    for (i in seq(from=1, to=UNTIL, by=1)){
+        NAME <- xmlName(DATA[[i]]);
+        if(NAME == "Column"){
+            COUNTER_VISIT_NODES = COUNTER_VISIT_NODES + 1;
+        }
+    }
+
+    for (i in seq(from=1, to=UNTIL, by=1)){
+        NAME <- xmlName(DATA[[i]]);
+        if(NAME == "Column"){
+            VISITS <- c(VISITS, as.numeric(xmlValue(DATA[[i]][[1]])));
+            DATE_TRAFFIC <- c(DATE_TRAFFIC, xmlValue(DATA[[i]][[2]]));
+        }
+    }
+
+    return(VISITS);
+}
+
+JAB.ANALYTICS.GET_DATES_ARRAY <- function(DATA){
+    #CREATE ARRAY
+    DATE_TRAFFIC <- c();
+    VISITS <- c();
+    PAGES <- c();
+
+    UNTIL <- xmlSize(DATA)
+
+    COUNTER_VISIT_NODES = 0;
+
+    for (i in seq(from=1, to=UNTIL, by=1)){
+        NAME <- xmlName(DATA[[i]]);
+        if(NAME == "Column"){
+            COUNTER_VISIT_NODES = COUNTER_VISIT_NODES + 1;
+        }
+    }
+
+    for (i in seq(from=1, to=UNTIL, by=1)){
+        NAME <- xmlName(DATA[[i]]);
+        if(NAME == "Column"){
+            VISITS <- c(VISITS, as.numeric(xmlValue(DATA[[i]][[1]])));
+            DATE_TRAFFIC <- c(DATE_TRAFFIC, xmlValue(DATA[[i]][[2]]));
+        }
+    }
+
+    return(DATE_TRAFFIC);
+}
+
+JAB.ANALYTICS.GET_DAYS_PER_MONTH <- function(MONTH){
+    DAYS <- 0;
+
+    if(MONTH == 1){
+        DAYS <- 31;
+    }else if(MONTH == 2){
+        DAYS <- 28;        
+    }else if(MONTH == 3){
+        DAYS <- 31;        
+    }else if(MONTH == 4){
+        DAYS <- 30;        
+    }else if(MONTH == 5){
+        DAYS <- 31;        
+    }else if(MONTH == 6){
+        DAYS <- 30;        
+    }else if(MONTH == 7){
+        DAYS <- 31;        
+    }else if(MONTH == 8){
+        DAYS <- 31;        
+    }else if(MONTH == 9){
+        DAYS <- 30;        
+    }else if(MONTH == 10){
+        DAYS <- 31;        
+    }else if(MONTH == 11){
+        DAYS <- 30;        
+    }else if(MONTH == 12){
+        DAYS <- 31;        
+    }
+
+    return(DAYS);
+}
+
+JAB.ANALYTICS.GET_DATA_PER_MONTH <- function(DATA,MONTH_START,N_MONTH){
+    HIST_DATA <- c()
+    INIT <- 1
+
+    j <- MONTH_START;
+
+    for (i in seq(from=1, to=N_MONTH, by=1)){
+
+        LIMIT <- INIT + JAB.ANALYTICS.GET_DAYS_PER_MONTH(j) -1;
+
+        MONTH <- sum(DATA[INIT:LIMIT]);
+        HIST_DATA <- c(HIST_DATA,MONTH)
+
+        INIT <- LIMIT +1
+
+        j <- j +1;
+        if(j > 12){
+            j <- 1;
+        }
+    }
+
+    return(HIST_DATA)
+}
+
+#SETTINGS
+
+JAB.ANALYTICS.CONFIG <- function(WD){
+
+    setwd(WD);
+    #Normal Analysis library
+    library("nortest");
+
+    #Time Series analysis libraries
+    library("dyn");
+    library("ArDec");
+    library("forecast");
+    library("fBasics");
+    library("fCalendar");
+    library("fSeries");
+    library("tseries");
+
+    #XML library
+    library("XML");
+    
+    #Loading Juan Antonio Breña Moral functions
+    source("http://www.juanantonio.info/p_research/statistics/r/scripts/eda/JAB.EDA.txt");
+    source("http://www.juanantonio.info/p_research/statistics/r/scripts/ts/JAB.TS.VIEW.txt");
+}
+
+
+JAB.TS.FIRST_VIEW <- function(DATA){
+    TITLE <- "www.juanantonio.info ";
+    X_LABEL = "Days"
+    Y_LABEL = "Visits per day"
+    plot(DATA,main = TITLE, xlab=X_LABEL, ylab=Y_LABEL);
+}
+
+JAB.ANALYTICS.GET_PREDICTION_ARRAY <- function(DATA){
+    DATOS_ARRAY_PREDICCION <- c();
+    for (i in 1:length(DATA)){
+        DATOS_ARRAY_PREDICCION <- c(DATOS_ARRAY_PREDICCION,as.numeric(DATA[[i]]));
+    }
+
+    return(DATOS_ARRAY_PREDICCION);
+}
+
+JAB.FORECAST.COMPARATIVE.GRAPH <- function(DATOS,DATOS_PREDICCION){
+	#1. Creamos un  vector para visualizar un grafico con la tendencia tras haber predecido.
+	TOTAL = length(DATOS) + length(DATOS_PREDICCION)
+	ARRAY_FINAL <- c()
+	ARRAY_FINAL <- DATOS
+	j = 1
+	for (i in (length(DATOS)+1):TOTAL){
+		ARRAY_FINAL[i] <- as.numeric(DATOS_PREDICCION[[j]])
+		j = j + 1
+	}
+
+	#2. Visualizacion de grafico
+	plot(ARRAY_FINAL,type="l", main = "PREDICCION MEDIANTE METODO ARIMA")
+	EJEX <- seq(TOTAL-length(DATOS_PREDICCION),TOTAL)
+	EJEY <- DATOS[[length(DATOS)]]
+	j= 2
+	for (i in 1:length(DATOS_PREDICCION)){
+		EJEY[j] <- DATOS_PREDICCION[[i]]
+		j = j+1
+	}
+	lines(EJEX,EJEY, type = "l", col = "red")
+}

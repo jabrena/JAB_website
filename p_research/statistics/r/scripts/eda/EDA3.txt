@@ -1,0 +1,15 @@
+# EJEMPLO EDA
+#22/10/2004
+
+#1. Carga de datos.
+male = c(6, 0, 2, 1, 2, 4.5, 8, 3, 17, 4.5, 4, 5)
+female = c(5, 13, 3, 2, 6, 14, 3, 1, 1.5, 1.5, 3, 8, 4)
+
+#2. Graficos 
+boxplot(list(Hombre = male, Mujer = female))
+
+
+growthDark = c(15, 20, 11, 30, 33, 22, 37, 20, 29, 35, 8, 10,15, 25)
+growthLight = c(10, 15, 22, 25, 9, 15, 4, 11, 20, 21, 27, 20, 10, 20)
+
+boxplot(list(dark = growthDark, light = growthLight))
