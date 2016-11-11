@@ -1,4 +1,0 @@
-#LECTURA DE DATOS
-#ICAI
-GLOBAL<- read.table("C:/Temp/GLOBAL.txt",header=T,sep="\t", quote="")
-pairs(GLOBAL)
