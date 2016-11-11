@@ -1,0 +1,52 @@
+
+
+setwd("C:/DATOS/DOCUMENTACION/DOCTORADO/MODELOS/R/REGRESION")
+source('simpleRegressionFunctions.txt', local=TRUE)
+
+'EJERCICIO 5.8
+
+'EXPLICACION DE DATOS
+
+'A: CARGA DE DATOS
+
+DATO1 <- c(48,49,50,51,52);
+DATO2 <- c(277.1,279.3,281.4,283.2,284.8)
+
+Y = as.numeric(DATO1)
+X = as.numeric(DATO2)
+
+TY <- "Estatura del bebe"
+TX <- "Periodo del embarazo"
+
+'B: UNIVARIATE EDA
+
+viewEDA(Y,X,TY,TX)
+
+'CONCLUSIONES:
+'Los datos parecen normales, sin sintomas de datos anomalos.
+
+'C: CREATE MODEL
+
+REGRESSION <- createSRM(Y,X,1)
+REGRESSION
+
+'CONCLUSIONES
+'Los resultados de la regresión son:
+
+'Residuals:
+'       1        2        3        4        5 
+' 0.09446 -0.04047 -0.12381 -0.05239  0.12221 
+
+'Coefficients:
+'            Estimate Std. Error t value Pr(>|t|)    
+'(Intercept) -95.0440     5.5398  -17.16 0.000431 ***
+'X             0.5159     0.0197   26.18 0.000122 ***
+'---
+'Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+
+'Residual standard error: 0.1205 on 3 degrees of freedom
+'Multiple R-Squared: 0.9956,	Adjusted R-squared: 0.9942 
+'F-statistic: 685.6 on 1 and 3 DF,  p-value: 0.0001222 
+
+'Como se observa, el R2 es de un 99.56% lo cual indica de la percepcion del modelo.
+'El modelo seria: Y =  -95.04405  +  0.5158773 *X

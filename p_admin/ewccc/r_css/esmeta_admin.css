@@ -1,0 +1,546 @@
+/*
+PROJECT: Esmeta Web Control Channel Center, EWCCC
+AUTHOR: Juan Antonio Breña Moral
+EMAIL: bren@juanantonio.info
+DESCRIPTION: CSS file for ERT
+CREATION DATE 01/08/2006
+LAST UPDATE: 09/09/2006
+*/
+
+/********************
+***** HTML TAGS *****
+********************/
+
+table{
+	border : 0px none;
+}
+body{
+	margin: 0px 0px 0px 0px;
+	background: White;
+	background-image: url(../r_media/images/backgrounds/background_pointille.gif);
+}
+form{
+	margin : 0px 0px 0px 0px;
+	border : 0px none;
+}
+
+img{
+		border : 0px none;
+}
+
+ul{
+	list-style: square;
+}
+
+/*************************
+***** GLOBLAL HEADER *****
+*************************/
+
+td.logo{
+	background-color: #CCCCCC;
+	border-bottom: 1px solid Black;
+}
+
+td.esmeta_header_options{
+	text-align: right;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	font-weight: bold;
+	border-bottom: 1px solid Black;
+	padding-right: 20px;
+	background-color: #cccccc;
+}
+
+a.esmeta_header_option{
+	color: Black;
+} 
+a.esmeta_header_option:link {
+	text-decoration: none;
+} 
+a.esmeta_header_option:visited {
+	text-decoration: none;
+} 
+a.esmeta_header_option:hover {
+	text-decoration: underline;
+}
+
+/**************************
+***** FILE: index.php *****
+**************************/
+
+#ESMETA_DESCRIPTION{
+	margin: 10px 0px 10px 0px;
+	border: 1px solid #ffffff;
+	
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: Black;
+	
+	width: 230px;
+}
+
+#ESMETA_MAIN_TOOLBAR{
+	margin: 10px 0px 10px 0px;
+	border: 1px solid #999999;
+	padding: 10px 10px 10px 10px;
+}
+
+a.MAIN_MENU_OPTIONS{
+	text-decoration: none;
+	color: Black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+} 
+a.MAIN_MENU_OPTIONS:link {
+	text-decoration: none;
+} 
+a.MAIN_MENU_OPTIONS:visited {
+	text-decoration: none;
+} 
+a.MAIN_MENU_OPTIONS:hover {
+	text-decoration: underline;
+}
+
+a.W2_POPUP_OPTIONS{
+text-decoration: none;
+	color: Black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+} 
+a.W2_POPUP_OPTIONS:link {
+	text-decoration: none;
+} 
+a.W2_POPUP_OPTIONS:visited {
+	text-decoration: none;
+} 
+a.W2_POPUP_OPTIONS:hover {
+	text-decoration: underline;
+}
+
+td.W2_GUIDE_TOOL{
+	color: Black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	padding: 10px 0px 10px 20px;
+}
+
+a.W2_GUIDE_TOOL{
+	text-decoration: none;
+	color: Black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+} 
+a.W2_GUIDE_TOOL:link {
+	text-decoration: none;
+} 
+a.W2_GUIDE_TOOL:visited {
+	text-decoration: none;
+} 
+a.W2_GUIDE_TOOL:hover {
+	text-decoration: underline;
+}
+
+h1.h1{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	color: Red;
+	margin-bottom: 0px;
+}
+
+h2.h2{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	color: Green;
+	margin: 0px 0px 0px 0px;
+}
+
+td.contents{
+	color: Black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	padding: 0px 10px 0px 20px;
+}
+
+#overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 90;
+	width: 100%;
+	height: 500px;
+	background-color: #000;
+	filter:alpha(opacity=60);
+	-moz-opacity: 0.6;
+	opacity: 0.6;
+	}
+
+#LOGIN{
+	margin: 10px 0px 0px 0px;
+	border: 1px solid #999999;
+	padding: 10px 10px 10px 10px;
+	background-color: White;
+	width: 300px;
+	
+	position: absolute;
+	top: 40px;
+	left: 0;
+	z-index: 100;
+	line-height: 0;
+}
+
+table.TABLE_FOOTER{
+	background-color: White;
+	border-bottom: 1px solid #999999;
+}
+
+input.LOGIN{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	width: 160px;
+	border: 1px solid #999999;
+	margin-bottom: 5px;
+}
+
+input.LOGIN_SUBMIT{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	border: 1px solid #999999;
+}
+
+td.LOGIN_ERT{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #000000;
+}
+
+/*******************************
+***** FILE: EWCCCPanel.php *****
+*******************************/
+
+table.INFO_LINE{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	padding: 10px 20px 0px 20px;
+	background-color: White;
+}
+
+/************************************
+***** FILE: EWCCC_UserAdmin.php *****
+************************************/
+
+td.EWCCC_TABLE_HEADER{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: red;
+	padding-right: 5px;
+}
+
+td.EWCCC_TABLE_ROW{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	color: Black;
+	
+	padding-right: 5px;
+}
+
+table.INFO_LINE{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	padding: 10px 20px 0px 20px;
+	background-color: White;
+}
+
+table.n2t1{
+	width: 100%;
+	background-color: White;
+}
+
+td.n2t1f1c1{
+	text-align: left;
+}
+
+table.n2t2{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	padding: 10px 20px 0px 20px;
+	background-color: White;
+}
+
+td.n2t2f1c1{
+	width: 100px;
+	vertical-align: top;
+}
+
+table.n3t1{
+	background-color: White;
+	border-bottom: 1px solid #999999;
+}
+
+#NEW_ACCOUNT{
+	margin: 10px 0px 10px 0px;
+	border: 1px solid #999999;
+	padding: 10px 10px 10px 10px;
+	background-color: White;
+	
+	position: absolute;
+	top: 40px;
+	left: 0;
+	z-index: 100;
+	line-height: 0;
+}
+
+#METADATA1{
+	margin: 10px 0px 10px 0px;
+	border: 1px solid #999999;
+	padding: 10px 10px 10px 10px;
+	background-color: White;
+	
+	position: absolute;
+	top: 40px;
+	left: 0;
+	z-index: 100;
+	line-height: 0;
+}
+
+
+#EXTRANET{
+	margin: 10px 0px 10px 0px;
+	border: 1px solid #999999;
+	padding: 10px 10px 10px 10px;
+	background-color: White;
+	
+	position: absolute;
+	top: 40px;
+	left: 0;
+	z-index: 100;
+	line-height: 0;
+}
+
+#NEW_DOCUMENT{
+	margin: 10px 0px 10px 0px;
+	border: 1px solid #999999;
+	padding: 10px 10px 10px 10px;
+	background-color: White;
+	
+	position: absolute;
+	top: 10px;
+	left: 0;
+	z-index: 100;
+	line-height: 0;
+}
+
+#FORM_UPLOADER{
+	margin: 10px 0px 10px 0px;
+	border: 1px solid #999999;
+	padding: 10px 10px 10px 10px;
+	background-color: White;
+	
+	position: absolute;
+	top: 10px;
+	left: 0;
+	z-index: 100;
+	line-height: 0;
+}
+
+#CREATE_FOLDER{
+	margin: 10px 0px 10px 0px;
+	border: 1px solid #999999;
+	padding: 10px 10px 10px 10px;
+	background-color: White;
+	
+	position: absolute;
+	top: 10px;
+	left: 0;
+	z-index: 100;
+	line-height: 0;
+}
+
+td.ERT_CREATE_ACCOUNT{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #000000;
+	width: 140px;
+	vertical-align: top;
+}
+
+td.EWCCC_LABEL{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #000000;
+	width: 140px;
+	vertical-align: top;
+}
+
+input.EWCCC_DOCUMENT_INPUT{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	width: 400px;
+	border: 1px solid #999999;
+	margin-bottom: 5px;
+}
+
+input.EWCCC_DOCUMENT_INPUT_TINY{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	width: 640px;
+	border: 1px solid #999999;
+	margin-bottom: 5px;
+}
+
+input.EWCCC_METADATA_INPUT{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	width: 400px;
+	height: 100px;
+	border: 1px solid #999999;
+	margin-bottom: 5px;
+}
+
+select.EWCCC_DOCUMENT_SELECT{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	width: 400px;
+	border: 1px solid #999999;
+	margin-bottom: 5px;
+}
+
+select.EWCCC_DOCUMENT_SELECT_TINY{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	width: 640px;
+	border: 1px solid #999999;
+	margin-bottom: 5px;
+}
+
+select.EWCCC_DOCUMENT_SELECT2{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	width: 300px;
+	border: 1px solid #999999;
+	margin-bottom: 5px;
+}
+
+select.EWCCC_USER_SELECT{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	width: 140px;
+	border: 1px solid #999999;
+	margin-bottom: 5px;
+}
+
+textarea.EWCCC_DOCUMENT_TEXTAREA{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	width: 400px;
+	height: 300px;
+	border: 1px solid #999999;
+	margin-bottom: 5px;
+}
+
+textarea.EWCCC_DOCUMENT_TEXTAREA_METADATA{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	width: 400px;
+	height: 30px;
+	border: 1px solid #999999;
+	margin-bottom: 5px;
+}
+
+textarea.EWCCC_METADATA_TEXTAREA{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	width: 400px;
+	height: 100px;
+	border: 1px solid #999999;
+	margin-bottom: 5px;
+}
+
+#AJAX_MESSAGE{
+	padding: 10px 0px 10px 0px;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+} 
+
+/* TIPOGRAFIA DE TEXTOS */
+.t0{
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 40px;
+	font-weight : bold;
+	font-style : normal;
+}
+.t1{
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 30px;
+	font-weight : bold;
+	font-style : normal;
+}
+.t2{
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 20px;
+	font-weight : bold;
+	font-style : normal;
+}
+.t3{
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 16px;
+	font-weight : bold;
+	font-style : normal;
+}
+.t4{
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 14px;
+	font-weight : bold;
+	font-style : normal;
+}
+.t5{
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 12px;
+	font-weight : bold;
+	font-style : normal;
+}
+.t6{
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 11px;
+	font-weight : normal;
+	font-style : normal;
+}
+
+/* MENU EWCCC */
+a.EWCCC_MAIN_MENU{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: Maroon;
+} 
+a.EWCCC_MAIN_MENU:link {
+	text-decoration: none;
+} 
+a.EWCCC_MAIN_MENU:visited {
+	text-decoration: none;
+} 
+a.EWCCC_MAIN_MENU:hover {
+	text-decoration: underline;
+}

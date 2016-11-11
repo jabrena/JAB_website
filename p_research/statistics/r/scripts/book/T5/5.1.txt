@@ -1,0 +1,19 @@
+'EJERCICIO 5.1
+
+'Fuente: Elaboración propia
+'Descripción:
+'100 datos de precios de viviendas y sus características
+'Primera columna : precios de viviendas  en euros
+'Segunda columna :  superficie en metros cuadrados
+'Tercera : numero de cuartos de baño
+'Cuarta: número de dormitorios
+'Quinta: número de plazas de garaje
+'Sexta: edad de la vivienda  
+'Séptima: 1 buenas vistas
+'              =0 vistas corrientes
+
+
+DATOS <- read.table("C:/DATOS/DOCUMENTACION/DOCTORADO/MODELOS/R/LU00025101/preciocasas.dat",header=F,sep="\t", quote="")
+
+Y <- as.numeric(DATOS$V1)
+X <- as.numeric(DATOS$V2)

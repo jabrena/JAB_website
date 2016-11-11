@@ -1,0 +1,46 @@
+# 1. Quantitative vs Quantitative
+
+#Copy in this data first
+ regions     <- c("NE","NW","Yorks","E.Midl","W.Midl","East","London",
+                 "SE","SW","Wales","Scotland","N.Ire")
+ alcohol <- c(5.5,6.2,5.5,5.7,5.0,5.5,5.9,5.9,6.3,6.5,4.8,5.8)
+ tobacco <- c(4.8,5.5,6.5,5.2,5.8,4.6,4.3,5.2,4.7,5.4,7.8,9.1)
+ clothing<- c(17.6,18.8,15.5,17,18.1,19.5,23.7,20.3,14.4,14.5,18.8,23.9)
+ power   <- c(12,11.4,10.8,11.6,11.7,1.8,10.5,12.2,11.6,11.9,12.10,17.9)
+
+# scatterplot
+ plot(alcohol, tobacco)  # read as plot x,y
+ plot(tobacco ~ alcohol) # equivalent: plot y against x
+
+# superimpose a scatterplot smoother on the plot
+ plot(alchol,tobacco)
+ lines(lowess(alcohol,tobacco))
+
+# superimpose a linear regression on the plot
+ plot(alchol,tobacco)
+ abline(lm(tobacco ~ alcohol))
+
+# identify points on a scatterplot
+ plot(alcohol,tobacco)
+ identify(alcohol,tobacco,regions)
+
+# a scatter.smooth function
+ scatter.smooth <- function(x,y) {
+  lines(lowess(x,y))
+ }
+
+#------------------------------------------------------------------
+# 2. Quantitative vs Qualitative
+
+# side-by-side boxplots: need put a list object in the argument
+ boxplot(list(alcohol=alcohol,tobacco=tobacco,clothing=clothing))
+
+# equivently create a list object first
+ expenditures <- list(alcohol=alcohol,tobacco=tobacco,clothing=clothing))
+ boxplot(expenditures)
+
+#------------------------------------------------------------------
+# 3. Qualitative vs Qualitative
+ hair.color <- c("brown","brown","black","blonde","red","red","blonde","brown")
+ eye.color  <- c("brown","brown","blue","blue","blue","green","blue","brown")
+ table(hair.color,eye.color)

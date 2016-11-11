@@ -1,0 +1,52 @@
+DATOS <- read.table("C:/Documents and Settings/JBRENA/Escritorio/1.ESTATURA.csv",header=T,sep="", quote="")
+
+# FUNCION QUE CALCULA LA MEDIA ARMONICA.
+JAB.EDA.MEDIA_GEOMETRICA <- function(DATOS){
+	MG <- exp(mean(log(DATOS)))
+	return(MG)
+}
+
+JAB.EDA.MEDIDAS_TENDENCIA_CENTRAL <- function(DATOS){
+	# VERIFICACION DE DATOS NUMERICOS. Se analiza una dimension.
+	if (is.numeric(ESTATURA) == TRUE){
+		#print("Los datos estan bien, son numericos.")
+		BANDERA <- TRUE
+	}else{
+		print("No se puede ejecutar esta funcion.\nLos datos suministrados, no son numericos.")
+		BANDERA <- FALSE
+	}
+
+	# SI TODO VA BIEN SE ANALIZA LA VARIABLE.
+	if(BANDERA){
+		# RESUMEN
+		S <- summary(DATOS)
+
+		# MEDIDAS DE TENDENCIA CENTRAL
+		MA <- mean(DATOS)
+		MG <- JAB.EDA.MEDIA_GEOMETRICA(DATOS)
+		MED <- median(DATOS)
+		
+		RANGOI <- IQR(DATOS)
+		MAD <- mad(DATOS)
+		RANGO <- range(DATOS)
+		QUANTILES <- quantile(DATOS, probs = seq(0, 1, 0.25), type = 8)
+	}
+}
+
+JAB.EDA.MEDIDAS_TENDENCIA_CENTRAL(DATOS$ESTATURA)
+
+# CURVA DE DENSIDAD DE LOS DATOS.
+DENSIDAD <- density(DATOS$ESTATURA)
+plot(DENSIDAD, type = "n")
+polygon(DENSIDAD, col = "wheat")
+
+#NO FUNCIONA
+(kernels <- eval(formals(density)$kernel))
+plot(density(DATOS$ESTATURA, bw = bw, n = 2^13),
+     main = "equivalent bandwidths, 7 different kernels")
+for(i in 2:length(kernels))
+   lines(density(DATOS$ESTATURA, bw = bw, adjust = h.f[i], kern =  kernels[i],
+         n = 2^13), col = i)
+legend(55, 0.035, legend = kernels, col = seq(kernels), lty = 1)
+}
+

@@ -1,0 +1,100 @@
+#Funcion de visualizacion de series temporales.
+JAB.TS.VIEW <- function(DATA){
+    op <- par(mfrow = c(3,1), mar = c(2,4,1,2)+.1);
+    acf(DATA, xlab="");
+    pacf(DATA, xlab="");
+    spectrum(DATA, xlab="", main="");
+    par(op);
+    par(mfrow= c(1,1));
+}
+
+JAB.TS.ACFS <- function(DATA){
+    op <- par(mfrow = c(2,1), mar = c(2,4,1,2)+.1);
+    acf(DATA, xlab="");
+    pacf(DATA, xlab="");
+    par(op);
+    par(mfrow= c(1,1));
+}
+
+JAB.TS.DIFFERENCES <- function(DATA){
+    N <- ndiffs(DATA);
+    if(N < 1){
+        k <- 2;
+    #}else if(N == 1){
+    #    k <- N+2
+    }else{
+        k <- N+2;
+    }
+    op <- par(mfrow=c(k,2));
+    for(i in 1:k) {
+        if(N == i-1){
+            acf(DATA, main=paste("Recommended ",i-1));
+            pacf(DATA, main=paste("Recommended ",i-1));
+        }else{
+            acf(DATA, main=i-1);
+            pacf(DATA, main=i-1);
+        }
+        DATA <- diff(DATA);
+    }
+    par(op);
+}
+
+JAB.TS.COR <- function(DATA){
+    x <- DATA;
+    n <- length(x)
+    k <- 5
+    m <- matrix(nr=n+k-1, nc=k)
+    colnames(m) <- c("x[i]", "x[i-1]", "x[i-2]", "x[i-3]", "x[i-4]")
+    for (i in 1:k) {
+        m[,i] <- c(rep(NA,i-1), x, rep(NA, k-i))
+    }
+    pairs(m,
+    gap = 0,
+    lower.panel = panel.smooth,
+    upper.panel = function (x,y) {
+    panel.smooth(x,y)
+    par(usr = c(0, 1, 0, 1))
+    a <- cor(x,y, use='pairwise.complete.obs')
+    text(.1,.9,
+    adj=c(0,1),
+    round(a, digits=2),
+    col='blue',
+    cex=2*a)
+    })
+    title("Autocorrelations",line = 3)
+}
+
+JAB.TS.PERIODOGRAM <- function(DATA){
+    cpgram(DATA);
+}
+
+ARRAY_MERGER <- function(ARRAY1,ARRAY2){
+	TOTAL = length(ARRAY1) + length(ARRAY2);
+	ARRAY_FINAL <- c();
+	ARRAY_FINAL <- ARRAY1;
+	j = 1;
+	for (i in (length(ARRAY1)+1):TOTAL){
+		ARRAY_FINAL[i] <- as.numeric(ARRAY2[[j]]);
+		j = j + 1;
+	}
+	return(ARRAY_FINAL);
+}
+
+#Dado un array de datos originales y un vector de datos de prediccion, se genera un grafico donde se muestra la 
+JAB.PREDICTION.GRAPH <- function(DATOS,DATOS_PREDICCION){
+    par(mfrow=c(1,1))
+	#1. Creamos un  vector para visualizar un grafico con la tendencia tras haber predecido.
+          ARRAY_FINAL <- ARRAY_MERGER(DATOS,DATOS_PREDICCION)
+
+          TOTAL = length(DATOS) + length(DATOS_PREDICCION);
+	#2. Visualizacion de grafico
+	plot(ARRAY_FINAL,type="l", main = "PREDICCION MEDIANTE METODO ARIMA", xlab="", ylab="Sales")
+	EJEX <- seq(TOTAL-length(DATOS_PREDICCION),TOTAL)
+	EJEY <- DATOS[[length(DATOS)]]
+	j= 2
+	for (i in 1:length(DATOS_PREDICCION)){
+		EJEY[j] <- DATOS_PREDICCION[[i]]
+		j = j+1
+	}
+	lines(EJEX,EJEY, type = "l", col = "red")
+}

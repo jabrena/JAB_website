@@ -1,0 +1,35 @@
+X <- c(4,6,5,2,3,7,8)
+Y <- c(2,3,5,7,8,9,2)
+DATOS <- data.frame(X,Y)
+DATOS
+
+
+JAB.PREDICCION.GRAFICO_COMPARACION <- function(DATOS){
+	MAX <- max(DATOS)
+	MIN <- min(DATOS)
+	COLORES <- rainbow(100)
+	EJEY <- c(MIN,MAX)
+	X <- c()
+	plot(DATOS[[1]],type="b", ylim=EJEY, xlab="MESES", ylab="VENTAS")
+	
+	for(i in 2:length(DATOS)){
+		lines(DATOS[[i]],col=COLORES[[i]], type="b")
+	}
+}
+
+JAB.PREDICCION.GRAFICO_COMPARACION(DATOS)
+
+plot(X, type="b" xlim="1:10")
+COLOR <- c("blue")
+lines(Y, col=COLOR,type="b")
+
+JAB.PREDICCION.INTEGRAR_DATOS <-(DATOS,DATOS_PREDICCION){
+	DATOS_INTEGRADOS <- c()
+	
+	for(i in 1:length(DATOS)){
+		print(DATOS[i])
+		print(DATOS_PREDICCION[i])
+		#DATOS_INTEGRADOS <- c(DATOS[[i]], DATOS_PREDICCION[[i]])
+		#print(DATOS_INTEGRADOS)	
+	}
+}

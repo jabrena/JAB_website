@@ -1,0 +1,32 @@
+#####################################
+# SCRIPT DE ANALISIS DE DATOS       #
+# Autor: Juan Antonio Breña Moral   #
+# Email: bren@juanantonio.info      #
+#####################################
+# PROGRAMA DE CONTROL DE VENTAS     #
+# VERSION 1.0                       #
+#####################################
+
+#
+# CARGAR LIBRERIAS
+#
+
+CARGA_LIBRERIAS <- function(){
+	cat("\n1. Carga de librerías\n")
+	#Libreria para realizar TABLAS.
+	library("xtable")
+}
+
+#
+# CARGAR LIBRERIAS
+#
+
+# El control de ventas se compone de 3 modulos que cumplen los siguientes objetivos
+# 1. Situacion actual.
+# 2. Deteccion de delegaciones que fallan.
+# 3. Prediccion con respecto a planificacion
+JAB.CONTROL.VENTAS <- function(VENTAS_REAL,OBJETIVOS,DELEGACIONES){
+	CARGA_LIBRERIAS()
+	source("JAB.CONTROL.VENTAS_ACTUAL.txt")
+	JAB.CONTROL.VENTAS_ACTUAL(VENTAS_REAL,OBJETIVOS,DELEGACIONES)
+}

@@ -1,0 +1,14 @@
+#EJEMPLO EDA
+#22-10-2004
+
+#1. Carga de datos
+preen = c(34, 24, 10, 16, 52, 76, 33, 31, 46, 24, 18, 26, 57, 32, 25, 48, 22, 48, 29, 19)
+
+
+## HISTOGRAMA CON BOXPLOT
+
+par(mfrow=c(1,2))
+hist(preen, prob=T)
+lines(density(preen))
+boxplot(preen)
+

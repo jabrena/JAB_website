@@ -1,0 +1,19 @@
+\documentclass[a4paper]{article}
+
+\title{REPORT 1}
+\author{Juan Antonio Breña Moral}
+
+\begin{document}
+
+\maketitle
+
+Informe de gestion de ventas de la empresa X.
+
+<<>>=
+#JAB.CONTROL.VENTAS(VENTAS_REAL,OBJETIVOS,DELEGACIONES)
+@
+Para entender la
+
+
+
+\end{document}
