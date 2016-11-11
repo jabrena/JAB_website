@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Conway's Game of Life in D3.js &amp; React.js</title>
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<script src="./react-15.1.0.min.js"></script>
+	<script src="./react-dom-15.1.0.min.js"></script>
+	<script type="text/javascript" src="./d3.3.5.17.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="reset.2.0.min.css" media="all"></link>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+</head>
+<body>
+<!--
+https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Rules
+The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, live or dead. Every cell interacts with its eight neighbors, which are the cells that are directly horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
+
+* any live cell with fewer than two live neighbours dies, as if caused by underpopulation
+* any live cell with more than three live neighbours dies, as if by overcrowding
+* any live cell with two or three live neighbours lives on to the next generation
+* any dead cell with exactly three live neighbours becomes a live cell
+-->
+	<div id="container"></div>
+	<script type="text/javascript" src="Conway.js"></script>
+	<script type="text/javascript" src="App.js"></script>
+</body>
+</html>
