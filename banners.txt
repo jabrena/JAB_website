@@ -1,2 +1,0 @@
-<!-- NEW JOB-->
-<td class="n1t2r1c2"><a href="jab_cms.php?id=29"><img src="r_media/images/promotions/newjob.jpg" /></a></td>

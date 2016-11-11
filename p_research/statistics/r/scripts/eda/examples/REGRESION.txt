@@ -1,6 +1,0 @@
-attach(VENTAS)
-Y <- CLMS_R
-X <- CLMS_R
-FORMULA <- Y ~ X
-MODELO = lm(FORMULA)
-summary(MODELO)
