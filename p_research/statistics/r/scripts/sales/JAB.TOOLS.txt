@@ -1,0 +1,20 @@
+#####################################
+# SCRIPT DE ANALISIS DE DATOS       #
+# Autor: Juan Antonio Breña Moral   #
+# Email: bren@juanantonio.info      #
+#####################################
+# FUNCIONES DE AYUDA                #
+# VERSION 1.0                       #
+#####################################
+
+# Funcion que dado 2 vectores los fusiona en uno solo.
+JAB.TOOLS.MERGE <- function(VECTOR1,VECTOR2){
+	TOTAL = length(VECTOR1) + length(VECTOR2)
+	ARRAY_FINAL <- VECTOR1
+	j = 1
+	for (i in (length(VECTOR1)+1):TOTAL){
+		ARRAY_FINAL[i] <- as.numeric(VECTOR2[[j]])
+		j = j + 1
+	}
+	return(ARRAY_FINAL)
+}

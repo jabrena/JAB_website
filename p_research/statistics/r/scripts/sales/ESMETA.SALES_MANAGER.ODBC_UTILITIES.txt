@@ -1,0 +1,30 @@
+###################################
+# SALES MANAGER 1.0               #
+# OBDC UTILITIES                  #
+# Autor: Juan Antonio Breña Moral #
+# Email: bren@juanantonio.info    #
+###################################
+
+#Useful function if you want to populate SALES table with SALES data
+POPULATE_TABLE <-function(SALES_ARRAY,BU,YEAR,MONTH){
+    CONN <- odbcConnect("SALES_MANAGER");
+
+    j <- MONTH;
+    YEAR <- YEAR;
+
+    for(i in 1:length(SALES_ARRAY)){
+        if(j >12){
+            j <- 1;
+            YEAR = YEAR +1;
+        }
+        FECHA <- paste("'",YEAR,"/",j,"/","01","'", sep = "");
+        QUERY = paste("INSERT INTO SALES (BU,SDATE,SALES) VALUES('",BU,"',",FECHA,",",SALES_ARRAY[i],")", sep = "");
+        print(QUERY)
+        j <- j +1;
+
+        sqlQuery(CONN,QUERY);
+    }
+
+    odbcClose(CONN);
+}
+

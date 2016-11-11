@@ -1,0 +1,89 @@
+###################################
+# SALES MANAGER 1.0               #
+# INSTALLATION SCRIPT             #
+# Autor: Juan Antonio Breña Moral #
+# Email: bren@juanantonio.info    #
+###################################
+
+HEADER <-function(){
+	cat("\n::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
+	cat("\n:: SALES MANAGER | AUTHOR: Juan Antonio Breña Moral             ::")
+	cat("\n:: VERSION: 2006-06-22 | DOWNLOADS: http://www.juanantonio.info ::")
+	cat("\n:: EMAIL: bren@juanantonio.info                                 ::")
+	cat("\n::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
+	cat("\n:: DESCRIPTION:                                                 ::")
+	cat("\n:: Sales Manager, is a set of R scripts, developed to improve   ::")
+	cat("\n:: sales budget control activities in any company.              ::")
+	cat("\n::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n")
+}
+
+#Function used to install necessary libraries
+INSTALL_R_LIBRARIES <- function(){
+    install.packages("DBI");
+    install.packages("RODBC");
+}
+
+#Previusly, you have to configurate ODBC conecction with MySQL
+#The name of the ODBC connection is SALES MANAGER
+CREATE_DB_TABLES <- function(){
+    CONN <- odbcConnect("SALES_MANAGER");
+
+    QUERY = "CREATE TABLE SALES(
+            BU VARCHAR(30), 
+            SDATE DATE,
+            SALES DOUBLE,
+            MARGIN DOUBLE)";
+
+    sqlQuery(CONN,QUERY);
+
+    QUERY = "CREATE TABLE SALES_PREDICTIONS(
+            BU VARCHAR(30),
+            SDATE DATE,
+            PSALES DOUBLE)";
+
+    sqlQuery(CONN,QUERY);
+
+    QUERY = "CREATE TABLE SALES_BUDGET(
+            BU VARCHAR(30),
+            YEAR INT(4),
+            SALES_TARGET DOUBLE)";
+
+    sqlQuery(CONN,QUERY);
+
+    QUERY = "CREATE TABLE SALESPERSON(
+            IDSP VARCHAR(30),
+            IDC VARCHAR(30),
+            SP VARCHAR(50))";
+
+    sqlQuery(CONN,QUERY);
+
+    QUERY = "CREATE TABLE CENTERS(
+            IDC VARCHAR(30),
+            CENTERS VARCHAR(50))";
+
+    sqlQuery(CONN,QUERY);
+
+    QUERY = "CREATE TABLE SALESPERSON_RESULTS(
+            IDSP VARCHAR(30),
+            SDATE DATE,
+            PSALES DOUBLE,
+            MARGIN DOUBLE)";
+
+    sqlQuery(CONN,QUERY);
+
+odbcGetErrMsg(CONN);
+
+    odbcClose(CONN);
+}
+
+LOAD_LIBRARIES <- function(){
+    library("DBI");
+    library("RODBC");
+}
+
+INSTALLATION <- function(){
+    HEADER();
+    INSTALL_R_LIBRARIES();
+    LOAD_LIBRARIES();
+    CREATE_DB_TABLES();
+}

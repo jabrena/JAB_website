@@ -1,0 +1,18 @@
+set.seed(321)
+x.y<-mvrnorm(n=500, mu=c(0,0), Sigma=matrix(c(1,.60,.60,1), 
+             ncol=2), empirical=T)
+
+x<-x.y[,1]
+y<-x.y[,2]
+
+par(mfrow=c(2,1))
+
+xhist <- hist(x, prob=T, ylim=c(0,.42))
+
+lines(density(x))
+
+seq.x<-seq(min(xhist$mids), max(xhist$mids),.01)
+lines(seq.x, dnorm(seq.x), col="red")
+
+legend(1.5,.4,c("Normal", "KDE"),lty=1,cex=.6,
+            col=c(2,1))

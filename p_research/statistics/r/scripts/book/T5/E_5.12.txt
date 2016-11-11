@@ -1,0 +1,70 @@
+
+
+setwd("C:/DATOS/DOCUMENTACION/DOCTORADO/MODELOS/R/REGRESION")
+source('simpleRegressionFunctions.txt', local=TRUE)
+
+'EJERCICIO 5.12
+
+'EXPLICACION DE DATOS
+'DATO1 PRESION
+'DATO2 TEMPERATURA
+
+'A: CARGA DE DATOS
+
+DATO1 <- c(20.79,22.40,23.15,23.89,24.02,25.14,28.49, 29.04, 29.88, 30.06);
+DATO2 <- c(194.5,197.9,199.4,200.9,201.4,203.6,209.5,210.7,211.9,212.2);
+
+Y = as.numeric(DATO1)
+X = as.numeric(DATO2)
+
+TY <- "Presion"
+TX <- "Temperatura"
+
+'B: UNIVARIATE EDA
+
+viewEDA(Y,X,TY,TX)
+
+'CONCLUSIONES:
+'Los datos tienen tendencia normal.
+'Variable1
+
+'KURTOSIS: -1.775213 
+'La distribuion es platicurtica, es decir, es menos apuntada que la normal.
+
+'SKEWNESS: 0.09638583 
+'La distribución es asimétrica positiva; existe mayor concentración de valores a la derecha de la media que a su izquierda.
+'Variable2
+
+'KURTOSIS: -1.735134 
+'La distribuion es platicurtica, es decir, es menos apuntada que la normal.
+
+'SKEWNESS: 0.02303951 
+'La distribución es asimétrica positiva; existe mayor concentración de valores a la derecha de la media que a su izquierda.
+
+'No se observan datos anomalos.
+
+'C: CREATE MODEL
+
+REGRESSION <- createSRM(Y,X,1)
+REGRESSION
+
+'CONCLUSIONES
+'Los resultados de la regresión son:
+
+'Residuals:
+'      Min        1Q    Median        3Q       Max 
+'-0.229012 -0.073170  0.001922  0.105083  0.228642 
+
+'Coefficients:
+'              Estimate Std. Error t value Pr(>|t|)    
+'(Intercept) -82.195633   1.629958  -50.43 2.65e-11 ***
+'X             0.528314   0.007979   66.22 3.01e-12 ***
+'---
+'Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+
+'Residual standard error: 0.1534 on 8 degrees of freedom
+'Multiple R-Squared: 0.9982,	Adjusted R-squared: 0.998 
+'F-statistic:  4385 on 1 and 8 DF,  p-value: 3.011e-12 
+
+'Como se observa, R2 es de un 99.82% lo cual indica de la bondad del modelo.
+'El modelo seria: Y =  -82.19563  +  0.5283136 *X
