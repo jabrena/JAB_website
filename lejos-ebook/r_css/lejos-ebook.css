@@ -1,0 +1,186 @@
+/*
+PROJECT: JAB 6.0
+AUTHOR: Juan Antonio Breña Moral
+EMAIL: bren@juanantonio.info
+DESCRIPTION: CSS file for Home Page of www.juanantonio.info
+CREATION DATE 01/01/2003
+LAST UPDATE: 20/11/2006
+*/
+
+/********************
+***** HTML TAGS *****
+********************/
+
+table{
+	border : 0px none;
+}
+body{
+	margin: 0px 0px 0px 0px;
+	background: #fffff;
+	background-image: url(../r_media/images/backgrounds/3.jpg);
+}
+form{
+	margin : 0px 0px 0px 0px;
+}
+
+ul{
+	list-style: square;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	padding-bottom: 0px;
+	padding-top: 0px;
+}
+
+img{
+	border : 0px none;
+}
+
+select{
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 11px;
+	font-weight : normal;
+	font-style : normal;
+}
+
+input{
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 11px;
+	font-weight : normal;
+	font-style : normal;
+}
+
+h1{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	color: #333333;
+}
+
+/*****************************
+***** WEB SITE STRUCTURE *****
+*****************************/
+
+/* NIVEL 1*/
+
+table.n1t1{
+	width: 1000px;
+	background-color: #ffffff;
+}
+
+td.n1t1r1c1{
+	vertical-align: top;
+	padding: 20px 0px 0px 20px;
+	
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: left;
+}
+
+#logo{
+	position: relative;
+	top: 20px;
+	left: 0px;
+}
+
+#cbNavigation{
+	position: relative;
+	top: 15px;
+	left: 0px;
+}
+
+select.cbNavigation{
+	margin : 5px 0px 5px 0px;
+	width : 210px;
+	background-color : #666666;
+	color : White;
+}
+
+p.comment{
+
+}
+
+td.n1t1r1c2{
+	vertical-align: top;
+}
+
+td.n1t1r1c3{
+	vertical-align: top;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	
+	padding-top: 110px;
+	width: 360px;
+	text-align: left;
+}
+
+a.contentLink{
+	color: Blue;
+}
+
+a.contentLink:link {
+	text-decoration: none;
+} 
+a.contentLink:visited {
+	text-decoration: none;
+} 
+a.contentLink:hover {
+	text-decoration: underline;
+}
+
+
+/* FOOTER */
+
+td.footer{
+	background-color: #333333;
+	color: #ffffff;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	font-style: normal;
+	padding-left: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: left;
+}
+
+a.footerLink{
+	color: #ffffff;
+}
+
+a.footerLink:link {
+	text-decoration: none;
+} 
+a.footerLink:visited {
+	text-decoration: none;
+} 
+a.footerLink:hover {
+	text-decoration: underline;
+}
+
+td.footer2{
+	background-color: #ffffff;
+	color: #000000;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	font-style: normal;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: left;
+}
+
+/*
+Web Forms
+*/
+
+input.inputText{
+	width: 200px;
+}
+
+textarea.inputText{
+	width: 200px;
+	height: 100px;
+}
+
