@@ -19,7 +19,6 @@ description: > # this means to ignore newlines until "baseurl:"
   Welcome to the personal website of Juan Antonio Breña Moral. 
   his website could be useful for you if you try to learn some stuff 
   about Internet, Robotics & Statistics.
-baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://www.juanantonio.info" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: juanantoniobm
 github_username:  jabrena
@@ -34,4 +33,7 @@ exclude:
   - Gemfile.lock
 timezone: GR
 encoding: utf-8
+permalink: /:year/:month/:day/:title.html
+
+
 

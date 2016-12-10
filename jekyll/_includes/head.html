@@ -1,52 +1,55 @@
 <head>
-
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+<!--
+     _       _        ___       _                       _      ___   
+    | | __ _| |__    |_ _|_ __ | |_ ___ _ __ _ __   ___| |_   ( _ )  
+ _  | |/ _` | '_ \    | || '_ \| __/ _ \ '__| '_ \ / _ \ __|  / _ \/\
+| |_| | (_| | |_) |   | || | | | ||  __/ |  | | | |  __/ |_  | (_>  <
+ \___/ \__,_|_.__( ) |___|_| |_|\__\___|_|  |_| |_|\___|\__|  \___/\/
+                 |/                                                  
+ ____       _           _   _          
+|  _ \ ___ | |__   ___ | |_(_) ___ ___ 
+| |_) / _ \| '_ \ / _ \| __| |/ __/ __|
+|  _ < (_) | |_) | (_) | |_| | (__\__ \
+|_| \_\___/|_.__/ \___/ \__|_|\___|___/                                                                                                                                                      
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css" type="text/css">
+-->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <!-- <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>-->
+    <title>Juan Antonio Bre&ntilde;a Moral / Home</title>
+    <meta name="description" content="P&aacute;gina personal del Ingeniero Juan Antonio Bre&ntilde;a Moral. Actualmente investiga en Marketing Avanzado, Direcci&oacute;n de empresas, R y Miner&iacute;a de datos. Juan Antonio Bre&ntilde;a Moral's web page. Currently he research in Advanced Marketing" />
 
-    <!-- Plugin CSS -->
-    <link rel="stylesheet" href="/css/animate.min.css" type="text/css">
-    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/vendor/simple-line-icons/css/simple-line-icons.css">
-    <link rel="stylesheet" href="/vendor/device-mockups/device-mockups.min.css">
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@juanantoniobm">
+    <meta name="twitter:title" content="Juan Antonio Bre&ntilde;a Moral">
+    <meta name="twitter:description" content="P&aacute;gina personal del Ingeniero Juan Antonio Bre&ntilde;a Moral. Actualmente investiga en Marketing Avanzado, Direcci&oacute;n de empresas, R y Miner&iacute;a de datos. Juan Antonio Bre&ntilde;a Moral's web page. Currently he research in Advanced Marketing">
+    <meta name="twitter:creator" content="@juanantoniobm">
+    <!-- Twitter summary card with large image must be at least 280x150px -->
+    <meta name="twitter:image:src" content="http://www.juanantonio.info/Images/about.jpg">
 
-    <!-- Custom CSS
-    <link rel="stylesheet" href="css/main.css" type="text/css"> -->
-    <link href="/css/main.css" rel="stylesheet">
+    <meta name="verify-v1" content="WIaS7oITIXqokH+Rg8hDQcTHJyriPqxFgOd9OAgT1lk=" />
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <meta name="generator" content="Juan Antonio Breña Moral" />
+    <meta name='Author' content='Juan Antonio Breña Moral' />
+
+    <meta name='Rating' content='General' />
+    <meta name='Revisit-After' content='7 days' />
+
+    <meta name='robots' content='all' />
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/Styles/bootstrap/3.3.1/bootstrap.min.css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Styles/bootstrap-social.css" />
+    <link rel="stylesheet" type="text/css" href='http://fonts.googleapis.com/css?family=Dosis:400' >
+    <link rel="stylesheet" type="text/css" href="/Styles/index.css" />
+
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
-    <!-- Google ADS mobile block -->
-    {% if site.google_ad_client %}
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "{{ site.google_ad_client }}",
-        enable_page_level_ads: true
-        });
-    </script>
-    {% endif %}
-
-    {% if site.addthis_id %}
-    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-      <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid={{ site.addthis_id }}"></script>
-      {% endif %}
-
 </head>
