@@ -202,6 +202,10 @@ and (max-device-width : 480px) {
     .container .nav {
         padding-top: 10px;
     }
+
+    .level2{
+        padding-top: 200px;
+    }
 }
 
 
