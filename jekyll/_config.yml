@@ -33,7 +33,7 @@ exclude:
   - Gemfile.lock
 timezone: GR
 encoding: utf-8
-permalink: /:year/:month/:day/:title.html
+permalink: /blog/:year/:month/:day/:title.html
 
 
 
