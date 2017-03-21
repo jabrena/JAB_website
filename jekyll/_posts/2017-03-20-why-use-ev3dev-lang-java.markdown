@@ -49,7 +49,7 @@ If I have memory, I was studying in the University a MSc Industrial Engineering 
 
 After reading some excellent [tutorials](http://www.lejos.org/rcx/tutorial/index.html), the [Javadocs](http://www.lejos.org/rcx/api/index.html) and [the first book from Brian Bagnall about LeJOS](https://www.amazon.com/Core-LEGO-MINDSTORMS-Programming-Platform/dp/0130093645/ref=asap_bc?ie=UTF8) I built my first robots with Java but the IR Tower was a nightmire and I didn´t like to recharge the batteries with every session. Fortunatelly soon appeared Lego Mindstomrs NXT and the experience improved so much. A new mindstorms with a Rechargeable battery, more internal memory and a big API with new features like a decent Garbage Collector (Big contribution from [Andy Shaw](http://www.gloomy-place.com/legoindex.htm)), Bluetooth comms, Sensor Framework, Local navigation features, Remoting & [ROS for NXT](http://wiki.ros.org/nxt_lejos). 
 
-`If you compare the Generation 1 & 2 (RCX and NXT), both Bricks used microcontroller boards and the LeJOS environment used multiple tricks to compile and run bytecodes with multiple limitations but at the end, the hardware was not able to run a full featured JVM.`
+`If you compare the Generation 1 & 2 (RCX and NXT), both Bricks used microcontroller boards and the LeJOS environment used multiple tricks to compile and run bytecodes with multiple limitations but at the end, the hardware was not able to run a full featured JVM.
 
 After some years playing with NXT, appeared in 2013 the third generation, Lego Mindstorms EV3. This version incorpored a nice UX running inside of a Linux system and it has 300 Mhz in compare with 48 Mhz from the old NXT. After some months of hard work from Andy, the whole LeJOS community had a solution to use a EV3 Brick with LeJOS.
 
@@ -168,7 +168,7 @@ Do you remember some case when you would like to test some feature in Java but i
 
 ## Final words
 
-I created EV3Dev-lang-java because I felt a bit restricted with current LeJOS approach. Now with current execution environment, I can write and execute the programs for robots `in the exact way` than I execute in my laptop but it is true that some lost some LeJOS features but little by little, I will add by demand in different libraries to not create another Monolith.
+I created EV3Dev-lang-java because I felt a bit restricted with current LeJOS approach. Now with current execution environment, I can write and execute the programs for robots `in the exact way` than I execute in my laptop but it is true that some features were lost but little by little, I will add by demand in different libraries to not create another Monolith.
 
 + LeJOS-Core, https://github.com/ev3dev-lang-java/ev3dev-lang-java
 + LeJOS-Commons, https://github.com/ev3dev-lang-java/lejos-commons
